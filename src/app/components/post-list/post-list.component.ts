@@ -30,33 +30,31 @@ export class PostListComponent implements OnInit {
   async load(options: any) {
     const post: any = await this.randomService.getList(options).toPromise();
     const results = post.results;
-    console.log(this.userPosts.length);
-    if (this.userPosts.length > 0 ){
-      this.userPosts = _.concat (this.userPosts, results);
-    }else{
+
+    if (this.userPosts.length > 0) {
+      this.userPosts = _.concat(this.userPosts, results);
+    } else {
       this.userPosts = results;
     }
 
     if (!this.hasNextPage(this.totalPages)) {
-           this.infiniteScroll.disabled = true;
+      this.infiniteScroll.disabled = true;
     }
   }
 
   async loadData(event) {
-
-      this.currentPage += 1;
-      await this.load({
-        results: this.result, page: this.currentPage, seed: 'abc'
-      });
-      setTimeout(() => {
-        event.target.complete();
-      }, 1000);
+    this.currentPage += 1;
+    await this.load({
+      results: this.result, page: this.currentPage, seed: 'abc'
+    });
+    setTimeout(() => {
+      event.target.complete();
+    }, 1000);
 
   }
 
   hasNextPage(totalPage) {
     let nextPage = false;
-
     if (this.currentPage < totalPage) {
       nextPage = true;
     }
@@ -65,7 +63,6 @@ export class PostListComponent implements OnInit {
 
 
   doRefresh(event) {
-
     this.currentPage = 1;
     this.userPosts = [];
     this.load({
@@ -76,6 +73,7 @@ export class PostListComponent implements OnInit {
       event.target.complete();
     }, 1000);
   }
+
   getPic(i) {
     const id = i + 100;
     const root = `${environment.randomPic}/id/${id}/1000/1000`;
