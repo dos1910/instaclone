@@ -67,6 +67,7 @@ export class PostListComponent implements OnInit {
   doRefresh(event) {
 
     this.currentPage = 1;
+    this.userPosts = [];
     this.load({
       results: this.result, page: this.currentPage, seed: 'abc'
     });
