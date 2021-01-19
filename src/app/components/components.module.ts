@@ -3,8 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
+import { PostListComponent } from './post-list/post-list.component';
 
-const COMPONENTS = [];
+const COMPONENTS = [PostListComponent];
 
 @NgModule({
   declarations: [...COMPONENTS],

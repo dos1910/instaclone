@@ -1,0 +1,68 @@
+<ion-grid>
+  <ion-row *ngFor="let userPost of userPosts; let i = index">
+    <ion-col>
+      <div>
+        <ion-list>
+          <ion-item-divider>
+            <ion-avatar slot="start">
+              <img [src]="userPost?.picture?.thumbnail" />
+            </ion-avatar>
+
+            <ion-label slot="start">
+              <h3>
+                {{ userPost?.name?.first + " " + userPost?.name?.last }}
+              </h3>
+            </ion-label>
+          </ion-item-divider>
+          <ion-item>
+            <img
+              class="random-img"
+              [src]="getPic(i)"
+              (error)="handleImgError($event)"
+            />
+          </ion-item>
+          <ion-item lines="none">
+            <ion-buttons slot="start">
+              <ion-button>
+                <ion-icon name="heart-outline"></ion-icon>
+              </ion-button>
+              <ion-button>
+                <ion-icon name="chatbubble-outline"></ion-icon>
+              </ion-button>
+              <ion-button>
+                <ion-icon name="send-outline"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <b>
+                {{ userPost?.name?.first + " " + userPost?.name?.last }}
+              </b>
+              <span>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </span>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<ion-infinite-scroll
+  #myinfinite
+  threshold="100px"
+  (ionInfinite)="loadData($event)"
+>
+  <ion-infinite-scroll-content
+    loadingSpinner="bubbles"
+    loadingText="Loading more data..."
+  >
+  </ion-infinite-scroll-content>
+</ion-infinite-scroll>
