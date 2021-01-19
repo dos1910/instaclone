@@ -86,6 +86,29 @@ export class PostListComponent implements OnInit {
     source.src = imgSrc;
   }
 
+  comment(post, comments) {
+    if (!post.commentList) {
+      post.commentList = [];
+    }
+    const commentPayload = {
+      user: 'Stevenson II Orcino',
+      comment: comments
+
+    };
+    post.commentList.push(commentPayload);
+    post.comment = undefined;
+    console.log(post.commentList);
+  }
+
+  like(userPost) {
+    if (!userPost.like) {
+        userPost.like = true;
+    }else{
+      userPost.like = undefined;
+    }
+    console.log(userPost.like);
+  }
+
   // ============================================================
   // ANGULAR LIFECYCLES
   // ============================================================
