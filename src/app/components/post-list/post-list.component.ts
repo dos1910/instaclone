@@ -1,10 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonInfiniteScroll } from '@ionic/angular';
+import { IonInfiniteScroll, ModalController, PopoverController } from '@ionic/angular';
 import * as _ from 'lodash';
 
 import { RandomService } from 'src/app/shared/services/random.service';
 import { BLANK_IMAGE } from 'src/app/shared/utils/constants';
 import { environment } from 'src/environments/environment';
+import { CommentsModalComponent } from '../comments-modal/comments-modal.component';
+import { SocialPopoverComponent } from '../social-popover/social-popover.component';
 
 @Component({
   selector: 'app-post-list',
@@ -19,7 +21,11 @@ export class PostListComponent implements OnInit {
   totalPages = 2;
   userPosts: any = [];
   currentPage = 1;
-  constructor(private randomService: RandomService) { }
+  constructor(
+    private randomService: RandomService,
+    public popoverController: PopoverController,
+    public modalController: ModalController
+  ) { }
   // ============================================================
   // UTILITIES
   // ============================================================
@@ -97,17 +103,41 @@ export class PostListComponent implements OnInit {
     };
     post.commentList.push(commentPayload);
     post.comment = undefined;
-    console.log(post.commentList);
+
   }
 
   like(userPost) {
     if (!userPost.like) {
-        userPost.like = true;
-    }else{
+      userPost.like = true;
+    } else {
       userPost.like = undefined;
     }
-    console.log(userPost.like);
+
   }
+
+  async socialPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      component: SocialPopoverComponent,
+      event: ev,
+      translucent: true
+    });
+
+    return await popover.present();
+  }
+
+  async commentModal(userPost, index) {
+    const pic = await this.getPic(index);
+    const modal = await this.modalController.create({
+      component: CommentsModalComponent,
+      componentProps: {
+        post: userPost,
+        picture: pic,
+      }
+    });
+    return await modal.present();
+  }
+
+
 
   // ============================================================
   // ANGULAR LIFECYCLES

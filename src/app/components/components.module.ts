@@ -4,8 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { PostListComponent } from './post-list/post-list.component';
+import { CommentsModalComponent } from './comments-modal/comments-modal.component';
 
-const COMPONENTS = [PostListComponent];
+const COMPONENTS = [PostListComponent, CommentsModalComponent];
 
 @NgModule({
   declarations: [...COMPONENTS],
@@ -16,6 +17,7 @@ const COMPONENTS = [PostListComponent];
     ReactiveFormsModule,
     RouterModule,
     IonicModule,
+    CommonModule
   ]
 })
 export class ComponentsModule { }

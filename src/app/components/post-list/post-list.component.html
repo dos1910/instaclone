@@ -31,16 +31,17 @@
                 <ion-icon name="heart-outline"></ion-icon>
               </ion-button>
 
-              <ion-button>
-                <ion-icon name="chatbubble-outline"></ion-icon>
+              <ion-button (click)="commentModal(userPost,i)">
+                <ion-icon name="chatbubble-outline" ></ion-icon>
               </ion-button>
-              <ion-button>
-                <ion-icon name="send-outline"></ion-icon>
+              <ion-button  (click)="socialPopover($event)">
+                <ion-icon name="share-social-outline"
+               
+                ></ion-icon>
               </ion-button>
             </ion-buttons>
           </ion-item>
-          <ion-item>
-            <ion-list>
+          <p  (click)="commentModal(userPost,i)" *ngIf="userPost?.commentList?.length > 2">View all {{userPost?.commentList?.length}} comment(s) </p>
               <ion-item lines="none">
                 <ion-label>
                   <b>
@@ -61,7 +62,7 @@
 
               <ion-item
                 lines="none"
-                *ngFor="let postComment of userPost?.commentList"
+                *ngFor="let postComment of userPost?.commentList  | slice:0:2;"
               >
                 <ion-label>
                   <b>
@@ -72,8 +73,7 @@
                   </span>
                 </ion-label>
               </ion-item>
-            </ion-list>
-          </ion-item>
+         
 
           <ion-item>
             <ion-input
