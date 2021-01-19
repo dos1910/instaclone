@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { PagesRoutingModule } from './pages-routing.module';
 import { HomePage } from './home/home.page';
+import { ComponentsModule } from '../components/components.module';
 
 const PAGES = [HomePage];
 
@@ -16,7 +17,7 @@ const PAGES = [HomePage];
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-
+    ComponentsModule,
     PagesRoutingModule
   ]
 })
